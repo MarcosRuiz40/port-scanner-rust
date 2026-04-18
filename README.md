@@ -23,3 +23,10 @@ Si falla, el puerto está cerrado o filtrado.
 
 ```bash
 cargo run
+```
+
+## 💻 Tecnologias utilizadas
+![Rust](https://img.shields.io/badge/language-Rust-orange)
+
+## 💪 Aprendizajes 
+- Uso de la libreria TcpStream, Thread, Duration
