@@ -1,42 +1,25 @@
-# port-scanner-rust
-Escáner de puertos concurrente en Rust usando TcpStream, threads y timeout.
+# 🔍 Escáner de puertos en Rust
 
-## Ejecución rápida
-```
-cargo run 
-```
-## Funcionalidades
-* Busca los puertos abierto en la red
-* Menciona que puertos estan abiertos actualmente
+Un sencillo escáner de puertos concurrente escrito en Rust que utiliza `TcpStream`, hilos y gestión de tiempos de espera.
 
-# Ejemplo real 
-```
-Puerto 135 abierto
-Puerto 445 abierto
-```
+## 🚀 Características
 
-## Tecnologías 
-![Rust](https://img.shields.io/badge/language-Rust-orange)
+- Escaneo de puertos concurrente mediante hilos
+- Tiempo de espera configurable por conexión
+- Escaneo rápido de hosts locales y remotos
+- Ligero y con mínimas dependencias (solo std)
 
-## Decisiones aplicadas:
-* Uso de TcpStream
-* Uso de Thread
-* Uso de Duration
-* Uso de concurrencia al hacer 2 hilos
-* Uso de Timeout
+## 🧠 Cómo funciona
 
-# Aprendizajes
+El programa divide el rango de puertos en varios hilos.
 
-En este proyecto trabajé en: 
-- Concurrencia
-- Hilos
-- Puertos
-- Manejo de errores
-- Timeout
+Cada hilo intenta conectarse a un puerto usando `TcpStream::connect_timeout`.
 
-# Futuras implementaciones
-```
-Buscar ip por terminal
-```
+Si la conexión es exitosa, el puerto está abierto.
 
-Este proyecto fue desarrollado como práctica de concurrencia, timeouts, hilos, manejo de errores 
+Si falla, el puerto está cerrado o filtrado.
+
+## ⚙️ Uso
+
+```bash
+cargo run
