@@ -1,21 +1,25 @@
 # 🔍 Escáner de Puertos en Rust
 
-Escáner de puertos concurrente desarrollado en Rust utilizando `TcpStream`, hilos y manejo de timeout.
+Escáner de puertos concurrente desarrollado desde cero en Rust, utilizando threads y `TcpStream::connect_timeout` para realizar conexiones TCP con control de tiempo de espera.
 
 ## 🚀 Características
 
-- Escaneo de puertos concurrente mediante threads
-- Uso de timeout para evitar bloqueos
-- Implementación simple sin dependencias externas
-- Rápido para pruebas en entornos locales
+- Escaneo concurrente mediante múltiples hilos
+- Uso de timeout para evitar bloqueos en conexiones
+- Implementación sin dependencias externas (std)
+- Enfoque en aprendizaje de networking a bajo nivel
+
+## 💡 Qué resuelve
+
+Este proyecto busca entender cómo funcionan los escáneres de red a bajo nivel, implementando manualmente la lógica de conexión y concurrencia en Rust.
 
 ## 🧠 ¿Cómo funciona?
 
-El programa divide el rango de puertos en múltiples hilos.  
-Cada hilo intenta establecer una conexión TCP con un puerto específico utilizando `TcpStream::connect_timeout`.
+El programa divide el rango de puertos en distintos hilos.  
+Cada hilo intenta establecer una conexión TCP con un puerto específico:
 
-- Si la conexión es exitosa → el puerto está abierto  
-- Si falla → el puerto está cerrado o filtrado  
+- ✔ Si la conexión es exitosa → el puerto está abierto  
+- ❌ Si falla → el puerto está cerrado o filtrado  
 
 ## ⚙️ Uso
 
