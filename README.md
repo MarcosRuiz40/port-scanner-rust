@@ -9,6 +9,12 @@ Escáner de puertos concurrente desarrollado desde cero en Rust, utilizando thre
 - Implementación sin dependencias externas (std)
 - Enfoque en aprendizaje de networking a bajo nivel
 
+## Features 
+- Multi-threading
+- Timeout asignable
+- Validaciones de inputs
+- Identificación de puertos conocidos
+
 ## 💡 Qué resuelve
 
 Este proyecto busca entender cómo funcionan los escáneres de red a bajo nivel, implementando manualmente la lógica de conexión y concurrencia en Rust.
@@ -24,4 +30,13 @@ Cada hilo intenta establecer una conexión TCP con un puerto específico:
 ## ⚙️ Uso
 
 ```bash
-cargo run
+cargo run -- 192.168.0.1 1 1024 100 4
+SALIDA:
+[OPEN] 80 (HTTP)
+[OPEN] 443 (HTTPS)
+```
+## Que aprendi 
+- Concurrencia en RUST
+- Manejo de errores con result y match
+- Networking básico
+- Timeouts 
