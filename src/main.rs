@@ -2,72 +2,19 @@ use core::time;
 use std::fs::read;
 use std::net::{SocketAddr, TcpStream};// Permite hacer conexiones TPC
 use std::thread; // Permite crear hilos
-use std::time::Duration; // permite manejar tiempos 
+use std::time::{Duration, Instant}; // permite manejar tiempos 
 use std::env::args; // Usamos el entorno de RUST
 use std::sync::mpsc;// comunicación entre hilos
 use std::sync::mpsc::Sender;
 use std::env;
 use std::net::IpAddr;
+mod modulos;
 
-fn nombre_puerto(puerto: u16) -> &'static str {
-    match puerto {
-        20 => "FTP-DATA",
-        21 => "FTP",
-        22 => "SSH",
-        23 => "TELNET",
-        25 => "SMTP",
-        53 => "DNS",
-        67 => "DHCP-SERVER",
-        68 => "DHCP-CLIENT",
-        69 => "TFTP",
-        80 => "HTTP",
-        110 => "POP3",
-        119 => "NNTP",
-        123 => "NTP",
-        135 => "RPC",
-        137 => "NETBIOS-NS",
-        138 => "NETBIOS-DGM",
-        139 => "NETBIOS-SSN",
-        143 => "IMAP",
-        161 => "SNMP",
-        179 => "BGP",
-        194 => "IRC",
-        389 => "LDAP",
-        443 => "HTTPS",
-        445 => "SMB",
-        465 => "SMTPS",
-        500 => "ISAKMP",
-        514 => "SYSLOG",
-        515 => "LPD",
-        520 => "RIP",
-        587 => "SMTP-SUBMISSION",
-        636 => "LDAPS",
-        989 => "FTPS-DATA",
-        990 => "FTPS",
-        993 => "IMAPS",
-        995 => "POP3S",
-        1433 => "MSSQL",
-        _ => "UNKNOWN"
-    }
-}
-
-fn escanear_rango(ip: IpAddr, inicio: u16, fin: u16, timeout: Duration, tx: Sender<String>) {
-    for puerto in inicio..=fin {
-        let direccion = SocketAddr::new(ip, puerto);
-
-        if TcpStream::connect_timeout(&direccion, timeout).is_ok() {
-            match tx.send(format!("[OPEN] {} ({})", puerto, nombre_puerto(puerto))){
-                Ok(v) => v,
-                Err(e) => {
-                    eprintln!("Error al enviar: {}", e);
-                    return;
-                }
-            };
-        }
-    }
-}
+use modulos::nombres_puertos;
+use modulos::escanear_rango;
 
 fn main() {
+let tiempo_inicio = Instant::now(); // Inicio de tiempo
 let args: Vec<String> = env::args().collect();
 
     if args.len() != 6 {
@@ -75,7 +22,6 @@ let args: Vec<String> = env::args().collect();
         eprintln!("Ejemplo: {} 192.168.0.1 1 1024 100 4", args[0]);
         return;
     }
-
 
 let ip = args[1].clone();
 let ip_2 = match ip.parse::<IpAddr>(){
@@ -89,7 +35,7 @@ let ip_2 = match ip.parse::<IpAddr>(){
 
 let inicio: u16 = match args[2].parse() {
     Ok(v) if v > 0 => v,
-    Ok(_)=>{
+    Ok( _ ) => {
         println!("La cantidad de puertos debe ser mayor a 0");
         return;
     }
@@ -192,4 +138,6 @@ for hilo in hilos{
    };
 }
 
+let fin_tiempo = tiempo_inicio.elapsed();// cortamos el tiempo 
+println!("El escaneo se completo en {} segundos ({} ms)",fin_tiempo.as_secs(), fin_tiempo.as_millis()); // mostramos el tiempo transcurrido
 }
