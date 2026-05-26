@@ -1,4 +1,4 @@
-fn nombre_puerto(puerto: u16) -> &'static str {
+pub fn nombre_puerto(puerto: u16) -> &'static str {
     match puerto {
         20 => "FTP-DATA",
         21 => "FTP",

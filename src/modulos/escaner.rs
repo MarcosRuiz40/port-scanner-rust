@@ -1,3 +1,8 @@
+use std::net::{IpAddr, SocketAddr, TcpStream};
+use std::time::Duration;
+use std::sync::mpsc::Sender;
+use crate::modulos::nombre_puertos::nombre_puerto;
+
 pub fn escanear_rango(ip: IpAddr, inicio: u16, fin: u16, timeout: Duration, tx: Sender<String>) {
 
     for puerto in inicio..=fin {

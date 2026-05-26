@@ -1,17 +1,14 @@
-use core::time;
-use std::fs::read;
 use std::net::{SocketAddr, TcpStream};// Permite hacer conexiones TPC
 use std::thread; // Permite crear hilos
 use std::time::{Duration, Instant}; // permite manejar tiempos 
-use std::env::args; // Usamos el entorno de RUST
 use std::sync::mpsc;// comunicación entre hilos
 use std::sync::mpsc::Sender;
 use std::env;
 use std::net::IpAddr;
 mod modulos;
 
-use modulos::nombres_puertos;
-use modulos::escanear_rango;
+use modulos::escaner::escanear_rango;
+use modulos::threads::dividir_trabajo;
 
 fn main() {
 let tiempo_inicio = Instant::now(); // Inicio de tiempo
@@ -88,7 +85,7 @@ if inicio >= fin {
     return;
 }
 
-let total = (fin - inicio + 1);
+let total = fin - inicio + 1;
 
 if threads as usize > total as usize {
     eprintln!("La cantidad de hilos no puede ser mayor que la cantidad de puertos");
@@ -104,22 +101,7 @@ let (tx,rx) = mpsc::channel();
     
     let mut hilos = Vec::new();
 
-for i in 0..threads{
-            
-    let inicio_thread = inicio + i * tamaño;
-    let fin_thread = if i == threads - 1 {
-        fin
-    }else{
-        inicio_thread + tamaño - 1
-    };
-    let ip_clone = ip_2;
-    let tx_clone = tx.clone();
-
-    let hilo = thread::spawn(move||{
-        escanear_rango(ip_clone, inicio_thread, fin_thread, timeout, tx_clone);
-    });
-    hilos.push(hilo);
-}
+let hilos = dividir_trabajo(inicio,fin,threads,tamaño,ip_2,timeout,tx );
 
 
 drop(tx); //Cerramos el canal principal
