@@ -25,19 +25,7 @@ Este proyecto busca entender cómo funcionan los escáneres de red a bajo nivel,
 
 ## 🏗️ Arquitectura
 El proyecto está organizado de forma modular para separar responsabilidades y facilitar su mantenimiento.
-
-src/
-│
-├── main.rs
-│
-└── modulos/
-    ├── mod.rs
-    ├── argumentos.rs       // Procesa los argumentos de la CLI
-    ├── validaciones.rs     // Valida IP, puertos, etc.
-    ├── cantidad_hilos.rs   // Calcula/distribuye el trabajo entre hilos
-    ├── threads.rs          // Crea y gestiona los hilos
-    ├── escaner.rs          // Lógica de conexión TCP
-    └── nombre_puerto.rs    // Asocia puertos conocidos con servicios
+<img width="536" height="250" alt="image" src="https://github.com/user-attachments/assets/243f0ce9-211e-4bb0-9192-5496d41bb7de" />
 
 ## 🧠 ¿Cómo funciona?
 
