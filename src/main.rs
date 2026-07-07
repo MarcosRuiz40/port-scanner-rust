@@ -1,6 +1,7 @@
 use std::time::{Duration, Instant}; 
 use std::sync::mpsc;
 use std::env;
+use indicatif::ProgressBar;
 
 mod modulos;
 use modulos::threads::dividir_trabajo;
@@ -11,8 +12,6 @@ use modulos::validaciones::{
     validar_cantidad_hilos, validar_hilos_vs_puertos, 
     validar_rango, validar_timeout_ms
 };
-
-
 
 fn main() {
 let tiempo_inicio = Instant::now(); // Inicio de tiempo
@@ -41,11 +40,17 @@ validar_hilos_vs_puertos(threads, total);
 
 let tamaño = total/threads;
 
+println!("==================================================");
+println!("[*] Iniciando escaneo en el objetivo: {}", ip_valida);
+println!("[*] Rango de puertos: {} - {} (Total: {})", inicio, fin, total);
+println!("[*] Configuración: {} hilos | Timeout: {}ms", threads, timeout_ms);
+println!("==================================================");
+println!("[+] Escaneando...");
+
 
 
 // Creamos un canal para comunicar los hilos con el hilo principal
 let (tx,rx) = mpsc::channel();
-
     
 let hilos = dividir_trabajo(inicio, fin, threads, tamaño, ip_valida, timeout, tx);
 
@@ -64,5 +69,8 @@ for hilo in hilos{
 }
 
 let fin_tiempo = tiempo_inicio.elapsed();// cortamos el tiempo 
+println!("==================================================");
+println!("[+] Escaneo se ha realizado con exito");
 println!("El escaneo se completo en {} segundos ({} ms)",fin_tiempo.as_secs(), fin_tiempo.as_millis()); // mostramos el tiempo transcurrido
+println!("==================================================");
 }
