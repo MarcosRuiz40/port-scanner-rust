@@ -18,6 +18,7 @@ El sistema, al recibir todos los datos que el usuario ingresa por la terminal, l
 - Configurable timeout
 - Port range scanning
 - Service detection (common ports)
+- grab_banner
 
 ## 💡 Qué resuelve
 
@@ -43,12 +44,8 @@ TcpStream::connect_timeout(...)
 
 ## ⚙️ Uso
 
-```bash
-cargo run -- 192.168.0.1 1 1024 100 4
-SALIDA:
-[OPEN] 80 (HTTP)
-[OPEN] 443 (HTTPS)
-```
+<img width="581" height="87" alt="image" src="https://github.com/user-attachments/assets/e20e0cbd-6d14-46ca-b465-c7d3f824a83b" />
+
 ## Que aprendi 
 - Concurrencia en RUST
 - Manejo de errores con result y match
