@@ -12,13 +12,17 @@ El sistema, al recibir todos los datos que el usuario ingresa por la terminal, l
 - Uso de timeout para evitar bloqueos en conexiones
 - Implementación sin dependencias externas (std)
 - Enfoque en aprendizaje de networking a bajo nivel
+- Implementación de Grab banners
 
 ## Features 
 - Multithreading
 - Configurable timeout
 - Port range scanning
 - Service detection (common ports)
+- Arquitectura modular
 - grab_banner
+- Medición del tiempo de ejecución
+- Salida clara por consola
 
 ## 💡 Qué resuelve
 
@@ -26,7 +30,8 @@ Este proyecto busca entender cómo funcionan los escáneres de red a bajo nivel,
 
 ## 🏗️ Arquitectura
 El proyecto está organizado de forma modular para separar responsabilidades y facilitar su mantenimiento.
-<img width="536" height="250" alt="image" src="https://github.com/user-attachments/assets/243f0ce9-211e-4bb0-9192-5496d41bb7de" />
+<img width="158" height="245" alt="image" src="https://github.com/user-attachments/assets/a203e6e2-f183-4485-a6e1-729eceda7b07" />
+
 
 ## 🧠 ¿Cómo funciona?
 
@@ -44,7 +49,7 @@ TcpStream::connect_timeout(...)
 
 ## ⚙️ Uso
 
-<img width="581" height="87" alt="image" src="https://github.com/user-attachments/assets/e20e0cbd-6d14-46ca-b465-c7d3f824a83b" />
+<img width="652" height="175" alt="image" src="https://github.com/user-attachments/assets/9908ee59-a0a0-46fb-96d3-5ee65cfd2b95" />
 
 ## Que aprendi 
 - Concurrencia en RUST
@@ -58,7 +63,6 @@ Este proyecto fue desarrollado con fines educativos para comprender el funcionam
 ## Mejoras futuras
 - Implementación de una versión asíncrona utilizando Tokio.
 - Exportación de resultados a JSON y CSV.
-- Banner grabbing para identificar versiones de servicios.
 - Resolución automática de nombres de host.
 - Soporte para escaneo UDP.
 - Configuración avanzada mediante argumentos CLI (clap).
