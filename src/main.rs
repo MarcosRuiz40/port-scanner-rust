@@ -1,7 +1,6 @@
 use std::time::{Duration, Instant}; 
 use std::sync::mpsc;
 use std::env;
-use indicatif::ProgressBar;
 
 mod modulos;
 use modulos::threads::dividir_trabajo;
