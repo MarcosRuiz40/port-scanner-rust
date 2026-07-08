@@ -4,18 +4,9 @@ Escáner de puertos concurrente desarrollado desde cero en Rust, utilizando thre
 
 ## Explicación breve del proyecto: 
 
-El sistema, al recibir todos los datos que el usuario ingresa por la terminal, los organiza en segmentos que cumplen distintas funciones. Entre ellas se incluyen la división del trabajo mediante múltiples hilos, la asignación de tiempos de espera entre ejecuciones para evitar un uso excesivo de recursos, la posibilidad de definir un rango de puertos (especificando un puerto inicial y uno final) y, por último, la comunicación mediante el uso de MPSC.
+El programa recibe los parámetros desde la línea de comandos, valida la entrada, divide el rango de puertos entre múltiples hilos y utiliza TcpStream::connect_timeout para comprobar qué puertos están abiertos. Los resultados se comunican al hilo principal mediante un canal MPSC y se muestran junto con el servicio conocido y el banner cuando está disponible.
 
-## 🚀 Características
-
-- Escaneo concurrente mediante múltiples hilos
-- Uso de timeout para evitar bloqueos en conexiones
-- Implementación sin dependencias externas (std)
-- Enfoque en aprendizaje de networking a bajo nivel
-- Implementación de Grab banners
-- Validaciones
-
-## Features 
+## 🚀 Features 
 - Multithreading
 - Configurable timeout
 - Port range scanning
@@ -50,13 +41,17 @@ TcpStream::connect_timeout(...)
 5. Finalmente, se muestran todos los puertos abiertos junto con el servicio asociado cuando es conocido.
 
 ## ⚙️ Uso
+Desde la terminal el usuario debe ejecutar el comando cargo run -- 192.168.0.1 1 1024 100 4 (ip + puerto de inicio y final + timeout + hilos)
 
 <img width="652" height="175" alt="image" src="https://github.com/user-attachments/assets/9908ee59-a0a0-46fb-96d3-5ee65cfd2b95" />
 
 ## Que aprendi 
-- Concurrencia en RUST
-- Manejo de errores con result y match
-- Networking básico
+- Ownership y Borrowing
+- Organización modular del código
+- Concurrencia con threads
+- Comunicación entre hilos mediante MPSC
+- Manejo de errores con Result y Option
+- Networking con TcpStream
 - Timeouts
 
 ## 🎯 Objetivos del proyecto
@@ -68,5 +63,4 @@ Este proyecto fue desarrollado con fines educativos para comprender el funcionam
 - Resolución automática de nombres de host.
 - Soporte para escaneo UDP.
 - Configuración avanzada mediante argumentos CLI (clap).
-- Benchmarks para comparar el rendimiento entre diferentes modelos de concurrencia.
 - Suite de pruebas automatizadas.
