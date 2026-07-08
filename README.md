@@ -13,6 +13,7 @@ El sistema, al recibir todos los datos que el usuario ingresa por la terminal, l
 - Implementación sin dependencias externas (std)
 - Enfoque en aprendizaje de networking a bajo nivel
 - Implementación de Grab banners
+- Validaciones
 
 ## Features 
 - Multithreading
