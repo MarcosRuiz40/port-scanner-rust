@@ -31,6 +31,7 @@ Este proyecto busca entender cómo funcionan los escáneres de red a bajo nivel,
 
 ## 🏗️ Arquitectura
 El proyecto está organizado de forma modular para separar responsabilidades y facilitar su mantenimiento.
+
 <img width="158" height="245" alt="image" src="https://github.com/user-attachments/assets/a203e6e2-f183-4485-a6e1-729eceda7b07" />
 
 
