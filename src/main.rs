@@ -1,8 +1,11 @@
 use std::time::{Duration, Instant}; 
 use std::sync::mpsc;
 use std::env;
+use std::fs;
+use chrono::Local;
 
 mod modulos;
+use crate::modulos::modelos::EscaneoPuerto;
 use modulos::threads::dividir_trabajo;
 use modulos::argumentos::validar_argumentos;
 // Agrupamos los imports del módulo validaciones
@@ -11,6 +14,8 @@ use modulos::validaciones::{
     validar_cantidad_hilos, validar_hilos_vs_puertos, 
     validar_rango, validar_timeout_ms
 };
+
+use crate::modulos::modelos::PuertoAbierto;
 
 fn main() {
 let tiempo_inicio = Instant::now(); // Inicio de tiempo
@@ -53,9 +58,19 @@ let (tx,rx) = mpsc::channel();
     
 let hilos = dividir_trabajo(inicio, fin, threads, tamaño, ip_valida, timeout, tx);
 
+let mut puerto_abiertos: Vec<PuertoAbierto> = Vec::new() ;
+
 for mensaje in rx{
-    println!("{}",mensaje);
+    println!("[OPEN] {} ({}) - {}",mensaje.puerto,mensaje.servicio,mensaje.banner);
+    puerto_abiertos.push(mensaje);
 }
+
+let escaneo = EscaneoPuerto{
+    ip: ip_valida,
+    fecha: Local::now().format("%Y-%m-%d %H:%M:%S").to_string(),
+
+    puertos_abiertos : puerto_abiertos
+};
 
 for hilo in hilos{
    match hilo.join(){
@@ -65,6 +80,12 @@ for hilo in hilos{
         return;
     }
    };
+}
+
+let json = serde_json::to_string_pretty(&escaneo).unwrap();
+match fs::write("Escaneo.json", json){
+    Ok(_)=> println!("[+] El archivo: Escaneo.json se ha guardado correctamente"),
+    Err(e)=> eprintln!("Se ha producido un error al guardar el archivo: {}", e),
 }
 
 let fin_tiempo = tiempo_inicio.elapsed();// cortamos el tiempo 

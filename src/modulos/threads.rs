@@ -2,11 +2,11 @@ use std::net::IpAddr;
 use std::time::Duration;
 use std::sync::mpsc::Sender;
 use std::thread;
-
+use crate::modulos::modelos::PuertoAbierto;
 
 use super::escaner::escanear_rango;
 
-pub fn dividir_trabajo(inicio: u16, fin: u16, threads: u16, tamaño: u16, ip: IpAddr, timeout: Duration, tx: Sender<String>)-> Vec<thread::JoinHandle<()>>{
+pub fn dividir_trabajo(inicio: u16, fin: u16, threads: u16, tamaño: u16, ip: IpAddr, timeout: Duration, tx: Sender<PuertoAbierto>)-> Vec<thread::JoinHandle<()>>{
     let mut hilos = Vec::new();
     for i in 0..threads{
             
