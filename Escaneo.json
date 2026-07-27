@@ -1,0 +1,11 @@
+{
+  "ip": "192.168.0.1",
+  "fecha": "2026-07-27 17:32:46",
+  "puertos_abiertos": [
+    {
+      "puerto": 53,
+      "servicio": "DNS",
+      "banner": "Banner no encontrado"
+    }
+  ]
+}

@@ -3,6 +3,7 @@ use std::sync::mpsc;
 use std::env;
 use std::fs;
 use chrono::Local;
+use colored::Colorize;
 
 mod modulos;
 use crate::modulos::modelos::EscaneoPuerto;
@@ -49,7 +50,7 @@ println!("[*] Iniciando escaneo en el objetivo: {}", ip_valida);
 println!("[*] Rango de puertos: {} - {} (Total: {})", inicio, fin, total);
 println!("[*] Configuración: {} hilos | Timeout: {}ms", threads, timeout_ms);
 println!("==================================================");
-println!("[+] Escaneando...");
+println!("[{}] Escaneando...", "+".green());
 
 
 
@@ -61,7 +62,7 @@ let hilos = dividir_trabajo(inicio, fin, threads, tamaño, ip_valida, timeout, t
 let mut puerto_abiertos: Vec<PuertoAbierto> = Vec::new() ;
 
 for mensaje in rx{
-    println!("[OPEN] {} ({}) - {}",mensaje.puerto,mensaje.servicio,mensaje.banner);
+    println!("[{}] {} ({}) - {}","OPEN".blue(),mensaje.puerto,mensaje.servicio,mensaje.banner);
     puerto_abiertos.push(mensaje);
 }
 
@@ -84,13 +85,13 @@ for hilo in hilos{
 
 let json = serde_json::to_string_pretty(&escaneo).unwrap();
 match fs::write("Escaneo.json", json){
-    Ok(_)=> println!("[+] El archivo: Escaneo.json se ha guardado correctamente"),
+    Ok(_)=> println!("[{}] Resultados guardados en: Escaneo.json","+".green()),
     Err(e)=> eprintln!("Se ha producido un error al guardar el archivo: {}", e),
 }
 
 let fin_tiempo = tiempo_inicio.elapsed();// cortamos el tiempo 
 println!("==================================================");
-println!("[+] Escaneo se ha realizado con exito");
+println!("[{}] Escaneo se ha realizado con exito","+".green());
 println!("El escaneo se completo en {} segundos ({} ms)",fin_tiempo.as_secs(), fin_tiempo.as_millis()); // mostramos el tiempo transcurrido
 println!("==================================================");
 }
