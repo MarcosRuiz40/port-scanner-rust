@@ -67,5 +67,5 @@ Este proyecto fue desarrollado con fines educativos para comprender el funcionam
 - [ ] Escaneo asyn con tokio
 - [ ] Escaneo UDP
 - [ ] Exportar CSV
-- [ ] Resolución de DSN
+- [ ] Resolución de DNS
 - [ ] Barra de progreso
