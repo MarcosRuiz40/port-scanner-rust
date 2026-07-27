@@ -12,7 +12,7 @@ El programa recibe los parámetros desde la línea de comandos, valida la entrad
 - Port range scanning
 - Service detection (common ports)
 - Arquitectura modular
-- grab_banner
+- Banner grabbing
 - Medición del tiempo de ejecución
 - Salida clara por consola
 - Exportación a JSON
