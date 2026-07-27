@@ -12,9 +12,10 @@ El programa recibe los parámetros desde la línea de comandos, valida la entrad
 - Port range scanning
 - Service detection (common ports)
 - Arquitectura modular
-- grab_banner
+- Banner grabbing
 - Medición del tiempo de ejecución
 - Salida clara por consola
+- Exportación a JSON
 
 ## 💡 Qué resuelve
 
@@ -23,7 +24,7 @@ Este proyecto busca entender cómo funcionan los escáneres de red a bajo nivel,
 ## 🏗️ Arquitectura
 El proyecto está organizado de forma modular para separar responsabilidades y facilitar su mantenimiento.
 
-<img width="158" height="245" alt="image" src="https://github.com/user-attachments/assets/a203e6e2-f183-4485-a6e1-729eceda7b07" />
+<img width="163" height="253" alt="image" src="https://github.com/user-attachments/assets/0d19bcce-2dd8-4e21-89a6-ea99aeefe82c" />
 
 
 ## 🧠 ¿Cómo funciona?
@@ -39,11 +40,16 @@ El proyecto está organizado de forma modular para separar responsabilidades y f
 TcpStream::connect_timeout(...)
 4. Si la conexión es exitosa, el puerto se considera abierto y se envía el resultado al hilo principal mediante un canal MPSC.
 5. Finalmente, se muestran todos los puertos abiertos junto con el servicio asociado cuando es conocido.
+6. Todo se guarda en un JSON
 
 ## ⚙️ Uso
 Desde la terminal el usuario debe ejecutar el comando cargo run -- 192.168.0.1 1 1024 100 4 (ip + puerto de inicio y final + timeout + hilos)
 
-<img width="652" height="175" alt="image" src="https://github.com/user-attachments/assets/9908ee59-a0a0-46fb-96d3-5ee65cfd2b95" />
+<img width="581" height="255" alt="image" src="https://github.com/user-attachments/assets/f9ab7bcc-d39f-480c-b856-6f1be2dc5280" />
+
+Para que luego se guarde el escaneo por si el usuario necesita verlo mas tarde 
+
+<img width="768" height="469" alt="image" src="https://github.com/user-attachments/assets/f4768740-3ffb-401d-ad60-b5d1b3de6660" />
 
 ## Que aprendi 
 - Ownership y Borrowing
@@ -58,9 +64,8 @@ Desde la terminal el usuario debe ejecutar el comando cargo run -- 192.168.0.1 1
 Este proyecto fue desarrollado con fines educativos para comprender el funcionamiento de un escáner de puertos a bajo nivel, evitando depender de bibliotecas externas y profundizando en los fundamentos de Rust y la programación de redes.
 
 ## Mejoras futuras
-- Implementación de una versión asíncrona utilizando Tokio.
-- Exportación de resultados a JSON y CSV.
-- Resolución automática de nombres de host.
-- Soporte para escaneo UDP.
-- Configuración avanzada mediante argumentos CLI (clap).
-- Suite de pruebas automatizadas.
+- [ ] Escaneo asyn con tokio
+- [ ] Escaneo UDP
+- [ ] Exportar CSV
+- [ ] Resolución de DNS
+- [ ] Barra de progreso
