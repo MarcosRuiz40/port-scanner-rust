@@ -64,8 +64,8 @@ Para que luego se guarde el escaneo por si el usuario necesita verlo mas tarde
 Este proyecto fue desarrollado con fines educativos para comprender el funcionamiento de un escáner de puertos a bajo nivel, evitando depender de bibliotecas externas y profundizando en los fundamentos de Rust y la programación de redes.
 
 ## Mejoras futuras
-- Implementación de una versión asíncrona utilizando Tokio.
-- Resolución automática de nombres de host.
-- Soporte para escaneo UDP.
-- Configuración avanzada mediante argumentos CLI (clap).
-- Suite de pruebas automatizadas.
+- [ ] Escaneo asyn con tokio
+- [ ] Escaneo UDP
+- [ ] Exportar CSV
+- [ ] Resolución de DSN
+- [ ] Barra de progreso
