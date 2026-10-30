@@ -1,4 +1,4 @@
-# 🔍 Escáner de Puertos en Rust
+# Escáner de Puertos en Rust
 
 Escáner de puertos concurrente desarrollado desde cero en Rust, utilizando threads y `TcpStream::connect_timeout` para realizar conexiones TCP con control de tiempo de espera.
 
@@ -6,7 +6,7 @@ Escáner de puertos concurrente desarrollado desde cero en Rust, utilizando thre
 
 El programa recibe los parámetros desde la línea de comandos, valida la entrada, divide el rango de puertos entre múltiples hilos y utiliza TcpStream::connect_timeout para comprobar qué puertos están abiertos. Los resultados se comunican al hilo principal mediante un canal MPSC y se muestran junto con el servicio conocido y el banner cuando está disponible.
 
-## 🚀 Features 
+## Features 
 - Multithreading
 - Configurable timeout
 - Port range scanning
@@ -17,17 +17,17 @@ El programa recibe los parámetros desde la línea de comandos, valida la entrad
 - Salida clara por consola
 - Exportación a JSON
 
-## 💡 Qué resuelve
+## Qué resuelve
 
 Este proyecto busca entender cómo funcionan los escáneres de red a bajo nivel, implementando manualmente la lógica de conexión y concurrencia en Rust.
 
-## 🏗️ Arquitectura
+## Arquitectura
 El proyecto está organizado de forma modular para separar responsabilidades y facilitar su mantenimiento.
 
 <img width="163" height="253" alt="image" src="https://github.com/user-attachments/assets/0d19bcce-2dd8-4e21-89a6-ea99aeefe82c" />
 
 
-## 🧠 ¿Cómo funciona?
+## ¿Cómo funciona?
 
 1. El usuario proporciona:
 - Dirección IP o hostname.
@@ -60,7 +60,7 @@ Para que luego se guarde el escaneo por si el usuario necesita verlo mas tarde
 - Networking con TcpStream
 - Timeouts
 
-## 🎯 Objetivos del proyecto
+## Objetivos del proyecto
 Este proyecto fue desarrollado con fines educativos para comprender el funcionamiento de un escáner de puertos a bajo nivel, evitando depender de bibliotecas externas y profundizando en los fundamentos de Rust y la programación de redes.
 
 ## Mejoras futuras
